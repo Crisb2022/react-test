@@ -1,5 +1,4 @@
 import {ColumnDef} from "@tanstack/react-table";
-import {Pokemon} from "./pokemon.model";
 
 export interface Customer {
     name?: string;

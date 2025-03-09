@@ -4,7 +4,7 @@ import {Customer} from "../../../models/customer.model";
 
 
 // useQuery
-export const useListCustomer = () => {
+export const useListTickets = () => {
     // wait Promise
     const wait = (message: number) => new Promise((resolve) => setTimeout(resolve, message));
 
@@ -27,7 +27,8 @@ export const useListCustomer = () => {
 
 // useMutation
 // crisApi: https://crisapi.free.beeceptor.com
-export const usePostCustomer = () => {
+export const usePostTickets = () => { 
+    console.log('hola')
     return useMutation({
 
         mutationFn: (values: Customer) => {
