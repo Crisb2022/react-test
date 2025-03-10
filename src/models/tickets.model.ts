@@ -1,29 +1,33 @@
 import {ColumnDef} from "@tanstack/react-table";
 
 export interface Ticket {
-    id_customer?: string;
-    id_catalag?: string;
+    idCustomer?: number;
+    idCatalog?: number;
     observation?: string;
     estado?: string;
     [key: string]: any;
 }
 
 export const TICKETS_INITIAL_STATE: Ticket = {
-    id_customer: "",
-    id_catalag: "",
+    idCustomer: 0,
+    idCatalog: 0,
     observation: "",
-    estado: ""
+    estado: "",
 }
 
 
 export const TICKETS_COLUMNS_TABLE: ColumnDef<Ticket>[] = [
     {
-        header: 'Id Usuario',
-        accessorKey: 'id_customer',
+        header: 'Numero de Ticket',
+        accessorKey: 'id',
     },
     {
-        header: 'id Catalogo',
-        accessorKey: 'id_catalag',
+        header: 'Usuario',
+        accessorKey: 'idCustomer',
+    },
+    {
+        header: 'Catalogo',
+        accessorKey: 'idCatalog',
     },
     {
         header: 'Observacion',
@@ -32,5 +36,9 @@ export const TICKETS_COLUMNS_TABLE: ColumnDef<Ticket>[] = [
     {
         header: 'Estado',
         accessorKey: 'estado',
+    },
+    {
+        header: 'Hora de Registro',
+        accessorKey: 'registryDate',
     }
 ];

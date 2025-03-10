@@ -1,12 +1,12 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {CustomerForm} from "./customer-pages/CustomerForm";
+import {TicketForm} from "./tickets-pages/TicketForm";
 
 const queryClient = new QueryClient();
 
 export const Pokemon = () => {
     return (
         <QueryClientProvider client={queryClient}>
-            <CustomerForm />
+            <TicketForm />
         </QueryClientProvider>
     );
 };

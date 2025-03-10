@@ -1,30 +1,30 @@
 import {ColumnDef} from "@tanstack/react-table";
 
 export interface Catalog {
-    catalog_name?: string;
-    catalog_detail?: string;
-    required_time?: string;
+    catalogName?: string;
+    catalogDetail?: string;
+    requiredTime?: string;
     [key: string]: any;
 }
 
 export const CATALOG_INITIAL_STATE: Catalog = {
-    catalog_name: "",
-    catalog_detail: "",
-    required_time: "",
+    catalogName: "",
+    catalogDetail: "",
+    requiredTime: "",
 }
 
 
 export const CATALOG_COLUMNS_TABLE: ColumnDef<Catalog>[] = [
     {
         header: 'Nombre Catalogo',
-        accessorKey: 'catalog_name',
+        accessorKey: 'catalogName',
     },
     {
         header: 'Detalle',
-        accessorKey: 'catalog_detail',
+        accessorKey: 'catalogDetail',
     },
     {
         header: 'SLA',
-        accessorKey: 'required_time',
+        accessorKey: 'requiredTime',
     },
 ];

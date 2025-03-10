@@ -1,37 +1,33 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useListCustomer, usePostCustomer } from "./useCustomerMethods";
+import { useListCatalog, usePostCatalog } from "./useCatalogMethods";
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import { CUSTOMER_COLUMNS_TABLE, CUSTOMER_INITIAL_STATE } from "../../../models/customer.model";
 import { Button, Table, Form } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import {CATALOG_COLUMNS_TABLE, CATALOG_INITIAL_STATE} from "../../../models/catalog.model";
 
-export const CustomerForm = () => {
-    const { data = [] } = useListCustomer(); // Evita que `data` sea undefined
-    const postCustomer = usePostCustomer();
-    const columns = CUSTOMER_COLUMNS_TABLE;
+export const CatalogForm = () => {
+    const { data = [] } = useListCatalog();
+    const postCatalog = usePostCatalog();
+    const columns = CATALOG_COLUMNS_TABLE;
     const table = useReactTable({ columns, data, getCoreRowModel: getCoreRowModel() });
 
     const formik = useFormik({
-        initialValues: CUSTOMER_INITIAL_STATE,
+        initialValues: CATALOG_INITIAL_STATE,
         validationSchema: Yup.object({
-            name: Yup.string().required("El nombre es obligatorio"),
-            lastName: Yup.string().required("El apellido es obligatorio"),
-            mail: Yup.string().email("Correo inválido").required("El correo es obligatorio"),
-            phone: Yup.string().required("El teléfono es obligatorio"),
-            identification: Yup.string().required("La identificación es obligatoria"),
-            userName: Yup.string().required("El usuario es obligatorio"),
-            password: Yup.string().min(6, "Mínimo 6 caracteres").required("La contraseña es obligatoria"),
+            catalogName: Yup.string().required("Catalogo Requerido"),
+            catalogDetail: Yup.string().required("Detalle requerido"),
+            requiredTime: Yup.string().required("Tiempo requerido")
         }),
         onSubmit: (values) => {
-            postCustomer.mutate(values);
+            postCatalog.mutate(values);
         },
     });
 
     return (
         <div>
             <Form onSubmit={formik.handleSubmit}>
-                {Object.keys(CUSTOMER_INITIAL_STATE).map((key) => (
+                {Object.keys(CATALOG_INITIAL_STATE).map((key) => (
                     <Form.Group key={key} controlId={key} className="mb-3">
                         <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1)}</Form.Label>
                         <Form.Control
@@ -47,8 +43,8 @@ export const CustomerForm = () => {
                         </Form.Control.Feedback>
                     </Form.Group>
                 ))}
-                <Button variant="primary" type="submit" disabled={postCustomer.isPending}>
-                    {postCustomer.isPending ? "Enviando..." : "Enviar"}
+                <Button variant="primary" type="submit" disabled={postCatalog.isPending}>
+                    {postCatalog.isPending ? "Enviando..." : "Enviar"}
                 </Button>
             </Form>
 

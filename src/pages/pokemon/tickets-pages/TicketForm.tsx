@@ -1,28 +1,24 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useListCustomer, usePostCustomer } from "../customer-pages/useCustomerMethods";
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import { CUSTOMER_COLUMNS_TABLE, CUSTOMER_INITIAL_STATE } from "../../../models/customer.model";
 import { Button, Table, Form } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useListTickets, usePostTickets } from "./useTicketsMethods";
+import {useListTickets, usePostTickets} from "./useTicketsMethods";
+import {TICKETS_COLUMNS_TABLE, TICKETS_INITIAL_STATE} from "../../../models/tickets.model";
 
-export const CustomerForm = () => {
+export const TicketForm = () => {
     const { data = [] } = useListTickets(); // Evita que `data` sea undefined
     const postCustomer = usePostTickets();
-    const columns = CUSTOMER_COLUMNS_TABLE;
+    const columns = TICKETS_COLUMNS_TABLE;
     const table = useReactTable({ columns, data, getCoreRowModel: getCoreRowModel() });
 
     const formik = useFormik({
-        initialValues: CUSTOMER_INITIAL_STATE,
+        initialValues: TICKETS_INITIAL_STATE,
         validationSchema: Yup.object({
-            name: Yup.string().required("El nombre es obligatorio"),
-            lastName: Yup.string().required("El apellido es obligatorio"),
-            mail: Yup.string().email("Correo inválido").required("El correo es obligatorio"),
-            phone: Yup.string().required("El teléfono es obligatorio"),
-            identification: Yup.string().required("La identificación es obligatoria"),
-            userName: Yup.string().required("El usuario es obligatorio"),
-            password: Yup.string().min(6, "Mínimo 6 caracteres").required("La contraseña es obligatoria"),
+            idCustomer: Yup.number().required("El nombre es obligatorio"),
+            idCatalog: Yup.number().required("El apellido es obligatorio"),
+            observation: Yup.string().required("El correo es obligatorio"),
+            estado: Yup.string().required("El teléfono es obligatorio"),
         }),
         onSubmit: (values) => {
             postCustomer.mutate(values);
@@ -32,7 +28,7 @@ export const CustomerForm = () => {
     return (
         <div>
             <Form onSubmit={formik.handleSubmit}>
-                {Object.keys(CUSTOMER_INITIAL_STATE).map((key) => (
+                {Object.keys(TICKETS_INITIAL_STATE).map((key) => (
                     <Form.Group key={key} controlId={key} className="mb-3">
                         <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1)}</Form.Label>
                         <Form.Control
