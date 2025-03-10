@@ -5,6 +5,16 @@ export interface Ticket {
     idCatalog?: number;
     observation?: string;
     estado?: string;
+    requiredTime?: string;
+    [key: string]: any;
+}
+
+export interface TicketTable {
+    customerId?: string;
+    catalogId?: string;
+    observation?: string;
+    estado?: string;
+    requiredTime?: string;
     [key: string]: any;
 }
 
@@ -13,29 +23,42 @@ export const TICKETS_INITIAL_STATE: Ticket = {
     idCatalog: 0,
     observation: "",
     estado: "",
-}
+    requiredTime: "",
+};
+
+export const TICKETS_TABLE_INITIAL_STATE: TicketTable = {
+    customerId: "",
+    catalogId: "",
+    observation: "",
+    estado: "",
+    requiredTime: "",
+};
 
 
-export const TICKETS_COLUMNS_TABLE: ColumnDef<Ticket>[] = [
+export const TICKETS_COLUMNS_TABLE: ColumnDef<TicketTable>[] = [
     {
-        header: 'Numero de Ticket',
+        header: 'Número de Ticket',
         accessorKey: 'id',
     },
     {
-        header: 'Usuario',
-        accessorKey: 'idCustomer',
+        header: 'Cliente',
+        accessorKey: 'customerId',
     },
     {
-        header: 'Catalogo',
-        accessorKey: 'idCatalog',
+        header: 'Catálogo',
+        accessorKey: 'catalogId',
     },
     {
-        header: 'Observacion',
+        header: 'Observación',
         accessorKey: 'observation',
     },
     {
         header: 'Estado',
         accessorKey: 'estado',
+    },
+    {
+        header: 'Tiempo requerido',
+        accessorKey: 'requiredTime',
     },
     {
         header: 'Hora de Registro',
